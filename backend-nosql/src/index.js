@@ -2,12 +2,22 @@ const express = require("express");
 const mongoose = require("mongoose");
 require("dotenv").config();
 const vehiculosRoutes = require("./routes/vehiculo.routes");
+const clientesRoutes = require("./routes/cliente.routes");
+const concesionariosRoutes = require("./routes/concesionario.routes");
+const empleadosRoutes = require("./routes/empleado.routes");
+const ventasRoutes = require("./routes/venta.routes");
+const transaccionesRoutes = require("./routes/transaccion.routes");
 
 const app = express();
 
 //middleware
 app.use(express.json());
 app.use('/api', vehiculosRoutes);
+app.use('/api', clientesRoutes);
+app.use('/api', concesionariosRoutes);
+app.use('/api', empleadosRoutes);
+app.use('/api', ventasRoutes);
+app.use('/api', transaccionesRoutes);
 
 //routes
 app.get('/', (req,res) => {
