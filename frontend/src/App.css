@@ -1,6 +1,51 @@
 .App {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-image: url('../public/auto.png');
+  background-size: cover;
+  background-position: center;
 }
+
+.menu {
+  width: 200px;
+  height: 100%;
+  background-color: rgba(12, 12, 12, 0.5); /* Fondo del menú */
+  padding: 20px;
+  color: #000; /* Color del texto */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  border-right: 2px solid #3498db; /* Borde derecho del menú */
+}
+
+.menu-header {
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.menu a {
+  text-decoration: none;
+  color: #333; /* Color del enlace */
+  margin: 10px 0; /* Espacio entre los enlaces */
+  font-size: 18px;
+  font-family: 'Roboto', sans-serif; /* Cambia 'Roboto' por la fuente que desees */
+  transition: color 0.3s; /* Efecto de transición en el color del texto */
+}
+
+.menu a:hover {
+  color: #3498db; /* Cambia el color del texto al pasar el ratón sobre el enlace */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Agrega sombra al pasar el ratón */
+}
+
+.content {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+
 
 .App-logo {
   height: 40vmin;

@@ -1,22 +1,42 @@
+import React from 'react';
+import { Link, Routes, Route } from 'react-router-dom';
 import './App.css';
+import ClienteLista from './components/clientelista';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src="auto.png" className="App-logo" alt="logo" />
-        <p>
-          Venta de vehiculos
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Prueba
-        </a>
-      </header>
+      <nav className="menu">
+        <div className="menu-header">Menú</div> {/* Agrega la cabecera aquí */}
+        <ul>
+          <li>
+            <Link to="/clientes">Clientes</Link>
+          </li>
+          <li>
+            <Link to="/vehiculos">Vehículos</Link>
+          </li>
+          <li>
+            <Link to="/ventas">Ventas</Link>
+          </li>
+          <li>
+            <Link to="/concesionarios">Concesionarios</Link>
+          </li>
+          <li>
+            <Link to="/empleados">Empleados</Link>
+          </li>
+          <li>
+            <Link to="/transacciones">Transacciones</Link>
+          </li>
+        </ul>
+      </nav>
+
+      <main className="content">
+        {/*agregar contenido */}
+        <Routes>
+          <Route path="/clientes" element={<ClienteLista />} />
+          {/* Agrega rutas y componentes para las otras vistas */}
+        </Routes>
+      </main>
     </div>
   );
 }
