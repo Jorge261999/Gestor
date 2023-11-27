@@ -21,9 +21,11 @@ db.sequelize.sync({ alter: true }).then(() => {
 
 require("./app/routes/cliente.routes")(app);
 require("./app/routes/vehiculo.routes")(app);
-require("./app/routes/mecanico.routes")(app);
-require("./app/routes/compra.routes")(app);
+require("./app/routes/empleado.routes")(app);
+require("./app/routes/venta.routes")(app);
 require("./app/routes/concesionario.routes")(app);
+require("./app/routes/transaccion.routes")(app);
+
 // ruta simple
 app.get("/", (req, res) => {
   res.send('Bienvenido a mi api');

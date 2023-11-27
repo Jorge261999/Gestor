@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-    const Mecanico = sequelize.define("mecanico", {
+    const Empleado = sequelize.define("empleado", {
       rut: {
         type: Sequelize.INTEGER,
         primaryKey: true
@@ -9,8 +9,11 @@ module.exports = (sequelize, Sequelize) => {
       },
       telefono: {
         type: Sequelize.INTEGER
+      },
+      cargo: {
+        type: Sequelize.STRING
       }
     });
-    return Mecanico;
+    return Empleado;
   };
   

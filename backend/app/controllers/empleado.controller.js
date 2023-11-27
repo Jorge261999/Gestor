@@ -1,8 +1,8 @@
 // Importar dependencias
 const db = require("../models");
-const Mecanico = db.mecanicos;
+const Empleado = db.empleados;
 const Op = db.Sequelize.Op;
-// Crear un nuevo mecanico
+// Crear un nuevo empleado
 exports.create = (req, res) => {
   // Validar consulta
 if (!req.body.rut) {
@@ -11,30 +11,31 @@ if (!req.body.rut) {
   });
   return;
 }
-// Crear un mecanico
-const mecanico= {
+// Crear un empleado
+const empleado= {
   rut: req.body.rut,
   nombre: req.body.nombre,
-  telefono: req.body.telefono
+  telefono: req.body.telefono,
+  cargo: req.body.cargo
 };
 // Guardar en base de datos
-Mecanico.create(mecanico)
+Empleado.create(empleado)
    .then(data => {
      res.send(data);
    })
    .catch(err => {
      res.status(500).send({
        message:
-         err.message || "Error al crear un nuevo mecanico"
+         err.message || "Error al crear un nuevo empleado"
      });
    });
  
 };
-// Retornar los mecanicos de la base de datos.
+// Retornar los empleados de la base de datos.
 exports.findAll = (req, res) => {
     const nombre = req.query.nombre;
     var condition = nombre ? { nombre: { [Op.like]: `%${nombre}%` } } : null;
-    Mecanico.findAll({ where: condition })
+    Empleado.findAll({ where: condition })
         .then(data => {
             res.send(data);
         })
@@ -46,16 +47,16 @@ exports.findAll = (req, res) => {
         });
      
 };
-// Buscar un mecanico por su rut
+// Buscar un empleado por su rut
 exports.findOne = (req, res) => {
     const rut = req.params.rut;
-    Mecanico.findByPk(rut)
+    Empleado.findByPk(rut)
         .then(data => {
             if (data) {
                 res.send(data);
             } else {
                 res.status(404).send({
-                    message: `No se encontró el mecanico.`
+                    message: `No se encontró el empleado.`
                 });
              }
         })
@@ -66,20 +67,20 @@ exports.findOne = (req, res) => {
         });
     
 };
-// actualizar un mecanico por su rut
+// actualizar un empleado por su rut
 exports.update = (req, res) => {
     const rut = req.params.rut;
-    Mecanico.update(req.body, {
+    Empleado.update(req.body, {
         where: { rut: rut }
     })
         .then(num => {
             if (num == 1) {
                 res.send({
-                    message: "Mecanico actualizado."
+                    message: "Empleado actualizado."
                 });
             } else {
                 res.send({
-                    message: `No se pudo actualizar el mecanico`
+                    message: `No se pudo actualizar el empleado`
                 });
             }
         })
@@ -90,43 +91,43 @@ exports.update = (req, res) => {
         });
     
 };
-// eliminar un mecanico por su rut
+// eliminar un empleados por su rut
 exports.delete = (req, res) => {
     const rut = req.params.rut;
-    Mecanico.destroy({
+    Empleado.destroy({
         where: { rut: rut }
     })
         .then(num => {
             if (num == 1) {
                 res.send({
-                    message: "Mecanico eliminado"
+                    message: "Empleado eliminado"
                 });
             } else {
                 res.send({
-                    message: `Mecanico no encontrado`
+                    message: `Empleado no encontrado`
                 });
             }
         })
         .catch(err => {
             res.status(500).send({
-                message: "Error al eliminar al mecanico"
+                message: "Error al eliminar al empleado"
             });
         });
     
 };
-// eliminar a todos los mecanicos
+// eliminar a todos los empleados
 exports.deleteAll = (req, res) => {
-    Mecanico.destroy({
+    Empleado.destroy({
         where: {},
         truncate: false
     })
         .then(nums => {
-            res.send({ message: `${nums} mecanicos eliminados!` });
+            res.send({ message: `${nums} empleados eliminados!` });
         })
         .catch(err => {
             res.status(500).send({
                 message:
-                err.message || "Error al eliminar a todos los mecanicos."
+                err.message || "Error al eliminar a todos los empleados."
             });
         });
     

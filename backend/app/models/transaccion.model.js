@@ -1,17 +1,16 @@
 module.exports = (sequelize, Sequelize) => {
-    const Vehiculo = sequelize.define("vehiculo", {
-      id_vehiculo: {
+    const Transaccion = sequelize.define("transaccion", {
+      id_transaccion: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true
       },
-      marca: {
-        type: Sequelize.STRING
-      },
-      precio: {
+      metodo: {
         type: Sequelize.INTEGER
+      },
+      estado:{
+        type: Sequelize.STRING
       }
-
     });
-    return Vehiculo;
+    return Transaccion;
   };

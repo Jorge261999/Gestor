@@ -1,13 +1,14 @@
 // Importar dependencias
 const db = require("../models");
-const Compra = db.compras;
+const Venta = db.ventas;
 const Cliente = db.clientes;
 const Vehiculo = db.vehiculos;
+const Concesionario = db.concesionarios;
 const Op = db.Sequelize.Op;
 
 exports.create = (req, res) => {
     console.log(req.body)
-    if (!req.body.id_compra) {
+    if (!req.body.id_venta) {
         res.status(400).send({
             message: "Content can not be empty!"
         });
@@ -15,15 +16,17 @@ exports.create = (req, res) => {
     }
     promise = [
         Cliente.findByPk(req.body.rut),
-        Vehiculo.findByPk(req.body.id_vehiculo)
+        Vehiculo.findByPk(req.body.id_vehiculo),
+        Concesionario.findByPk(req.body.id_concesionario)
     ]
     Promise.all(promise)
         .then(result => {
-            console.log(req.body.id_compra)
-            Compra.create({
-                    id_compra: req.body.id_compra,
+            console.log(req.body.id_venta)
+            Venta.create({
+                    id_venta: req.body.id_venta,
                     rut: result[0].rut,
-                    id_vehiculo: result[1].id_vehiculo
+                    id_vehiculo: result[1].id_vehiculo,
+                    id_concesionario: result[2].id_concesionario
 
                 })
                 .then(sale => {
@@ -32,7 +35,7 @@ exports.create = (req, res) => {
                 .catch(err => {
                     res.status(500).send({
                     message:
-                        err.message || "Error al crear una compra"
+                        err.message || "Error al crear una venta"
                     });
                 });
         })
@@ -44,7 +47,7 @@ exports.create = (req, res) => {
 };
 
 exports.findAll = (req, res) => {
-    Compra.findAll({ where: {} })
+    Venta.findAll({ where: {} })
         .then(data => {
             res.send(data);
         })
@@ -55,16 +58,16 @@ exports.findAll = (req, res) => {
             });
         });
 };
-// Buscar una compra por su id
+// Buscar una venta por su id
 exports.findOne = (req, res) => {
-    const id_compra = req.params.id_compra;
-    Compra.findByPk(id_compra)
+    const id_venta = req.params.id_venta;
+    Venta.findByPk(id_venta)
         .then(data => {
             if (data) {
                 res.send(data);
             } else {
                 res.status(404).send({
-                    message: `No se encontró la compra.`
+                    message: `No se encontró la venta.`
                 });
              }
         })
@@ -74,11 +77,11 @@ exports.findOne = (req, res) => {
             });
         });
 };
-// actualizar una compra por su id
+// actualizar una venta por su id
 exports.update = (req, res) => {
-    const id_compra = req.params.id_compra;
-    Compra.update(req.body, {
-        where: { id_compra: id_compra }
+    const id_venta = req.params.id_venta;
+    Venta.update(req.body, {
+        where: { id_venta: id_venta }
     })
         .then(num => {
             if (num == 1) {
@@ -97,11 +100,11 @@ exports.update = (req, res) => {
             });
         });
 };
-// Eliminar compra por su id
+// Eliminar venta por su id
 exports.delete = (req, res) => {
-    const id_compra = req.params.id_compra;
-    Compra.destroy({
-        where: { id_compra: id_compra }
+    const id_venta = req.params.id_venta;
+    Venta.destroy({
+        where: { id_venta: id_venta }
     })
         .then(num => {
             if (num == 1) {
@@ -120,9 +123,9 @@ exports.delete = (req, res) => {
             });
         });
 };
-// eliminar todas las compras 
+// eliminar todas las ventas 
 exports.deleteAll = (req, res) => {
-    Compra.destroy({
+    Venta.destroy({
         where: {},
         truncate: false
     })

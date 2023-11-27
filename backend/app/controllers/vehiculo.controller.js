@@ -1,53 +1,41 @@
 // Importar dependencias
 
 const db = require("../models");
+const vehiculoModel = require("../models/vehiculo.model");
 const Vehiculo = db.vehiculos;
-const Mecanico = db.mecanicos;
-const Concesionario = db.concesionarios;
 
 const Op = db.Sequelize.Op;
 
 
 
-// Agregar un nuevo Vehiculo
+// Crear un nuevo vehiculo
 exports.create = (req, res) => {
-    console.log(req.body)
-    if (!req.body.id_vehiculo) {
-        res.status(400).send({
-            message: "Content can not be empty!"
-        });
-        return;
-    }
-    promise = [
-        Mecanico.findByPk(req.body.rut),
-        Concesionario.findByPk(req.body.id_concesionario)
-    ]
-    Promise.all(promise)
-        .then(result => {
-            console.log(req.body.id_vehiculo)
-            Vehiculo.create({
-                    id_vehiculo: req.body.id_vehiculo,
-                    rut: result[0].rut,
-                    id_concesionario: result[1].id_concesionario
-
-                })
-                .then(sale => {
-                    res.send(sale);
-                })
-                .catch(err => {
-                    res.status(500).send({
-                    message:
-                        err.message || "Error al crear un vehiculo"
-                    });
-                });
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Error en la búsqueda"
-            });
-        });
-};
-
+    // Validar consulta
+  if (!req.body.id_vehiculo) {
+      res.status(400).send({
+      message: "Content can not be empty!"
+    });
+    return;
+  }
+  // Crear un vehiculo
+  const vehiculo= {
+    id_vehiculo: req.body.id_vehiculo,
+    marca: req.body.marca,
+    precio: req.body.precio,
+  };
+  // Guardar en base de datos
+  Vehiculo.create(vehiculo)
+     .then(data => {
+       res.send(data);
+     })
+     .catch(err => {
+       res.status(500).send({
+         message:
+           err.message || "Error al crear un nuevo vehiculo"
+       });
+     });
+   
+  };
 
 
 // Retornar todos los Vehiculos de la base de datos.

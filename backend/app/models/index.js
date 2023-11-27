@@ -19,14 +19,15 @@ db.sequelize = sequelize;
 // Importa modelos a Sequelize
 db.clientes = require("./cliente.model.js")(sequelize, Sequelize);
 db.concesionarios = require("./concesionario.model.js")(sequelize, Sequelize);
-db.mecanicos = require("./mecanico.model.js")(sequelize, Sequelize);
+db.empleados = require("./empleado.model.js")(sequelize, Sequelize);
 db.vehiculos = require("./vehiculo.model.js")(sequelize, Sequelize);
-db.compras = require("./compra.model.js")(sequelize, Sequelize);
+db.ventas = require("./venta.model.js")(sequelize, Sequelize);
+db.transacciones = require("./transaccion.model.js")(sequelize, Sequelize);
 
 
-db.compras.belongsTo(db.clientes, { foreignKey: 'rut' });
-db.compras.belongsTo(db.vehiculos, { foreignKey: 'id_vehiculo' });
-db.vehiculos.belongsTo(db.mecanicos, { foreignKey: 'rut' });
-db.vehiculos.belongsTo(db.concesionarios, { foreignKey: 'id_concesionario' });
+db.ventas.belongsTo(db.clientes, { foreignKey: 'rut' });
+db.ventas.belongsTo(db.vehiculos, { foreignKey: 'id_vehiculo' });
+db.transacciones.belongsTo(db.ventas, { foreignKey: 'id_venta' });
+db.ventas.belongsTo(db.concesionarios, { foreignKey: 'id_concesionario' });
 
 module.exports = db;
