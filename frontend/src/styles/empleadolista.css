@@ -1,0 +1,80 @@
+.empleado-lista {
+    background-color: #f0f0f0; /* Fondo gris claro */
+    padding: 20px;
+  }
+  
+  h1 {
+    color: #333; /* Texto oscuro */
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  li {
+    background-color: #fff; /* Fondo blanco para cada elemento de la lista */
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  form {
+    background-color: #fff; /* Fondo blanco para el formulario */
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+  }
+  
+  button {
+    background-color: #007bff; /* Azul para los botones */
+    color: #fff; /* Texto blanco */
+    padding: 10px;
+    margin-right: 5px;
+    margin-left: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .btn-agregar {
+    background-color: green;
+    color: white;
+  }
+  
+  /* Estilo para el botón Eliminar */
+  .btn-eliminar {
+    background-color: red;
+    color: white;
+  }
+  
+  /* Estilo para el botón Modificar */
+  .btn-modificar {
+    background-color: yellow;
+    color: black; /* Puedes ajustar el color del texto según tus preferencias */
+  }
+  
+  .btn-agregar:hover {
+    background-color: #00b345; /* Cambio de color al pasar el mouse */
+  }
+  
+  .btn-eliminar:hover {
+    background-color: rgb(160, 10, 40);
+  }
+  
+  .btn-modificar:hover {
+    background-color: rgb(199, 218, 32);
+  }

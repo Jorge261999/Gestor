@@ -81,9 +81,26 @@ const ClienteLista = () => {
   };
 
   const handleSubmitFormulario = async () => {
+    // Validar si los campos obligatorios están vacíos
+    if (!nuevoCliente.rut || !nuevoCliente.nombre || !nuevoCliente.telefono) {
+      console.error('Error: Todos los campos son obligatorios');
+      alert('Todos los campos son obligatorios');
+      return;
+    }
+  
+    // Validar el formato del RUT y el teléfono
+    const rutRegex = /^\d+$/; // Expresión regular para números enteros
+    const telefonoRegex = /^\d+$/; // Expresión regular para números enteros
+  
+    if (!rutRegex.test(nuevoCliente.rut) || typeof nuevoCliente.nombre !== 'string' || !telefonoRegex.test(nuevoCliente.telefono)) {
+      console.error('Error: Datos incorrectos o en formato incorrecto');
+      alert('Datos incorrectos o en formato incorrecto');
+      return;
+    }
+  
     try {
       let response;
-
+  
       if (clienteModificar) {
         response = await fetch(`http://localhost:9000/api/clientes/${clienteModificar.rut}`, {
           method: 'PUT',
@@ -101,7 +118,7 @@ const ClienteLista = () => {
           body: JSON.stringify(nuevoCliente),
         });
       }
-
+  
       if (response.ok) {
         const nuevoClienteAgregado = await response.json();
         setClientes((prevClientes) => {
@@ -121,7 +138,7 @@ const ClienteLista = () => {
       console.error('Error al procesar el formulario:', error);
     }
   };
-
+  
   return (
     <div className="cliente-lista">
       <div className="cabecera">

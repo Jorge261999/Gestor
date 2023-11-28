@@ -2,6 +2,11 @@ import React from 'react';
 import { Link, Routes, Route } from 'react-router-dom';
 import './App.css';
 import ClienteLista from './components/clientelista';
+import VehiculoLista from './components/vehiculolista';
+import ConcesionarioLista from './components/concesionariolista';
+import VentaLista from './components/ventalista';
+import EmpleadoLista from './components/empleadolista';
+import TransaccionLista from './components/transaccionlista';
 
 function App() {
   return (
@@ -34,6 +39,11 @@ function App() {
         {/*agregar contenido */}
         <Routes>
           <Route path="/clientes" element={<ClienteLista />} />
+          <Route path="/vehiculos" element={<VehiculoLista />} />
+          <Route path="/concesionarios" element={<ConcesionarioLista />} />
+          <Route path="/ventas" element={<VentaLista />} />
+          <Route path="/empleados" element={<EmpleadoLista />} />
+          <Route path="/transacciones" element={<TransaccionLista />} />
           {/* Agrega rutas y componentes para las otras vistas */}
         </Routes>
       </main>
